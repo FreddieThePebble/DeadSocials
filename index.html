@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>How Dead Are Your Socials?</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@700&display=swap">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+            background-color: #333;
+            color: #fff;
+        }
+        .container {
+            text-align: center;
+            background-color: #444;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 600px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+        h1 {
+            font-family: 'Roboto', sans-serif;
+            font-weight: 700;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .description {
+            font-size: 0.9em;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+        .question {
+            margin-bottom: 15px;
+        }
+        .question label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .question input[type="number"],
+        .question input[type="text"],
+        .question select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .result {
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            color: #333;
+            margin-top: 20px;
+        }
+        .footer {
+            width: 100%;
+            padding: 10px;
+            background-color: #333;
+            color: #fff;
+            box-sizing: border-box;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+        }
+        .footer a {
+            color: #007BFF;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .footer img {
+            width: 24px;
+            height: 24px;
+            margin: 0 5px;
+        }
+        .toggle-mode {
+            cursor: pointer;
+            font-size: 24px;
+        }
+        /* Hide scrollbar */
+        .container::-webkit-scrollbar {
+            display: none; /* Chrome, Safari, and Opera */
+        }
+        .container {
+            -ms-overflow-style: none; /* IE and Edge */
+            scrollbar-width: none; /* Firefox */
+        }
+        /* Light mode styles */
+        body.light-mode {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        body.light-mode .container {
+            background-color: #fff;
+            color: #333;
+        }
+        body.light-mode h1 {
+            color: #333;
+        }
+        body.light-mode .description {
+            color: #666;
+        }
+        body.light-mode .result {
+            background-color: #fff;
+            color: #333;
+        }
+        body.light-mode .footer {
+            background-color: #f0f0f0;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>How Dead Are Your Socials?</h1>
+        <div class="description">
+            This game is a joke. All questions are optional. I am lazy and won’t bother updating this game when Elon renames Twitter again (lol). Each social media platform is different. I tried to accommodate them all, but I’m not perfect.
+        </div>
+        
+        <div class="question">
+            <label for="q1">When was your last post? (How many days ago)</label>
+            <input type="number" id="q1" min="0" oninput="calculateScore()">
+        </div>
+
+        <div class="question">
+            <label for="q2">How many followers/subscribers do you have? (Main account)</label>
+            <input type="number" id="q2" min="0" oninput="calculateScore()">
+        </div>
+
+        <div class="question">
+            <label for="q3">How many likes/upvotes did your last post get?</label>
+            <input type="number" id="q3" min="0" oninput="calculateScore()">
+        </div>
+
+        <div class="question">
+            <label for="q4">How old is your social media account? (Years)</label>
+            <input type="number" id="q4" min="0" oninput="calculateScore()">
+        </div>
+
+        <div class="question">
+            <label for="q5">How much time do you spend on that social media platform daily? (Estimate in hours)</label>
+            <input type="number" id="q5" min="0" oninput="calculateScore()">
+        </div>
+
+        <div class="question">
+            <label for="q6">How many times have you posted in total?</label>
+            <input type="number" id="q6" min="0" oninput="calculateScore()">
+        </div>
+
+        <div class="question">
+            <label for="q7">How many comments did your last post get?</label>
+            <input type="number" id="q7" min="0" oninput="calculateScore()">
+        </div>
+
+        <div class="question">
+            <label for="q8">How many views does your most viewed post have?</label>
+            <input type="number" id="q8" min="0" oninput="calculateScore()">
+        </div>
+
+        <div class="question">
+            <label for="q9">How many likes does your most viewed post have?</label>
+            <input type="number" id="q9" min="0" oninput="calculateScore()">
+        </div>
+
+        <div class="question">
+            <label for="q10">Do you reply to comments?</label>
+            <select id="q10" oninput="calculateScore()">
+                <option value="">Select</option>
+                <option value="1">Yes - All</option>
+                <option value="0.75">Yes - Most</option>
+                <option value="0.5">Yes - A Few</option>
+                <option value="0.25">Yes - Rarely</option>
+                <option value="0">No - Never</option>
+            </select>
+        </div>
+
+        <div class="question">
+            <label for="q11">Are you a full-time creator/influencer?</label>
+            <select id="q11" oninput="calculateScore()">
+                <option value="">Select</option>
+                <option value="1">Yes</option>
+                <option value="0">No</option>
+            </select>
+        </div>
+
+        <div class="result" id="result">Please answer at least one question to get an estimate.</div>
+    </div>
+
+    <div class="footer">
+        <div class="toggle-mode" id="toggleMode" onclick="toggleMode()">☀️</div>
+        Made by <a href="https://www.reddit.com/user/FreddieThePebble/" target="_blank" aria-label="FreddieThePebble's Reddit profile">FreddieThePebble</a>
+        <a href="https://x.com/intent/post?url=https%3A%2F%2Ffreddiethepebble.github.io%2FDeadSocials%2F&text=Is+Your+Twitter+Dead%3F+%28Game%29" target="_blank" aria-label="Share on Twitter">
+            <img src="https://raw.githubusercontent.com/FreddieThePebble/DeadSocials/main/Images/logos/Twitter.png" alt="Twitter">
+        </a>
+        <a href="https://www.instagram.com/" target="_blank" aria-label="Share on Instagram">
+            <img src="https://raw.githubusercontent.com/FreddieThePebble/DeadSocials/main/Images/logos/Insta.png" alt="Instagram">
+        </a>
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://freddiethepebble.github.io/DeadSocials/" target="_blank" aria-label="Share on Facebook">
+            <img src="https://raw.githubusercontent.com/FreddieThePebble/DeadSocials/main/Images/logos/Facebook.png" alt="Facebook">
+        </a>
+        <a href="https://www.reddit.com/submit?url=https%3A%2F%2Ffreddiethepebble.github.io%2FDeadSocials%2F" target="_blank" aria-label="Share on Reddit">
+            <img src="https://raw.githubusercontent.com/FreddieThePebble/DeadSocials/main/Images/logos/Reddit.png" alt="Reddit">
+        </a>
+    </div>
+
+    <script>
+        function calculateScore() {
+            const q1 = parseInt(document.getElementById('q1').value) || 0;
+            const q2 = parseInt(document.getElementById('q2').value) || 0;
+            const q3 = parseInt(document.getElementById('q3').value) || 0;
+            const q4 = parseInt(document.getElementById('q4').value) || 0;
+            const q5 = parseFloat(document.getElementById('q5').value) || 0;
+            const q6 = parseInt(document.getElementById('q6').value) || 0;
+            const q7 = parseInt(document.getElementById('q7').value) || 0;
+            const q8 = parseInt(document.getElementById('q8').value) || 0;
+            const q9 = parseInt(document.getElementById('q9').value) || 0;
+            const q10 = parseFloat(document.getElementById('q10').value) || 0;
+            const q11 = parseFloat(document.getElementById('q11').value) || 0;
+
+            if (!q1 && !q2 && !q3 && !q4 && !q5 && !q6 && !q7 && !q8 && !q9 && q10 === 0 && q11 === 0) {
+                document.getElementById('result').innerText = "Please answer at least one question to get an estimate.";
+                return;
+            }
+
+            const isFullTime = q11 === 1;
+            const postsPerDay = q6 / (q4 * 365); // Calculate average posts per day
+            const averagePostFrequency = isFullTime ? 10 : 0.1; // Full-time creators post more frequently
+
+            const scores = [];
+            const maxScores = [];
+
+            if (q1 > 0) { scores.push(1 - (q1 / 365)); maxScores.push(1); }
+            if (q2 > 0) {
+                if (isFullTime) {
+                    scores.push(1 - (q2 / 200000));
+                } else {
+                    scores.push(1 - (q2 / 1000));
+                }
+                maxScores.push(1);
+            }
+            if (q3 > 0) {
+                if (isFullTime) {
+                    scores.push(1 - (q3 / 10000000));
+                } else {
+                    scores.push(1 - (q3 / 1000));
+                }
+                maxScores.push(1);
+            }
+            if (q4 > 0) { scores.push(1 - (q4 / 10)); maxScores.push(1); }
+            if (q5 > 0) { scores.push(1 - (q5 / 2.38)); maxScores.push(1); } // Average time spent on social media
+            if (q6 > 0) {
+                const postingFrequencyScore = 1 - Math.min(postsPerDay / averagePostFrequency, 1);
+                scores.push(postingFrequencyScore);
+                maxScores.push(1);
+            }
+            if (q7 > 0) { scores.push(1 - (q7 / 100)); maxScores.push(1); }
+            if (q8 > 0) { scores.push(1 - (q8 / 1000000)); maxScores.push(1); } // Views on most viewed post
+            if (q9 > 0) { scores.push(1 - (q9 / 1000000)); maxScores.push(1); } // Likes on most viewed post
+            if (q10 >= 0) { scores.push(q10); maxScores.push(1); }
+
+            if (scores.length === 0) {
+                document.getElementById('result').innerText = "Please answer at least one question to get an estimate.";
+            } else {
+                const totalScore = scores.reduce((a, b) => a + b, 0);
+                const maxScore = maxScores.reduce((a, b) => a + b, 0);
+
+                const deadPercentage = (totalScore / maxScore) * 100;
+                const resultText = `Your social media is ${deadPercentage.toFixed(2)}% dead.`;
+
+                document.getElementById('result').innerText = resultText;
+            }
+        }
+
+        function toggleMode() {
+            const body = document.body;
+            const toggleIcon = document.getElementById('toggleMode');
+            body.classList.toggle('light-mode');
+
+            if (body.classList.contains('light-mode')) {
+                toggleIcon.innerHTML = '🌑';
+            } else {
+                toggleIcon.innerHTML = '☀️';
+            }
+        }
+    </script>
+</body>
+</html>
